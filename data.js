@@ -34,7 +34,7 @@ const products = [
         price: 9500,
         image: "images/HighpowerKL037.jpg",
         description: {
-            fr: "Multifunctional Car Emergency Jump Starter High-Capacity PC+ABS Vehicle-Mounted Starter Battery Booster",,
+            fr: "Multifunctional Car Emergency Jump Starter High-Capacity PC+ABS Vehicle-Mounted Starter Battery Booster",
             ar:  "مصدر طاقة عالي الجودة لبدء التشغيل في حالات الطوارئ، جهاز بدء التشغيل في حالات الطوارئ 12 فولت، معدات شحن البطارية، طاقة خارجية (موديل 29B)"
         }
     },
