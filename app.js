@@ -1,5 +1,5 @@
 // --- State Management ---
-let currentLang = 'fr'; // Default language
+let currentLang = 'ar'; // Default language
 let cart = []; // Array of { product, quantity }
 let currentPage = 'home';
 let currentProductId = null;
