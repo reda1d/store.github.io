@@ -170,7 +170,7 @@ const translations = {
             continueShopping: "Continuer vos achats"
         },
         hero: {
-            title: "Nouvelle Collection",
+            title: "Nouveautés Premium",
             subtitle: "Découvrez nos produits exclusifs de haute qualité avec paiement à la livraison.",
             cta: "Acheter maintenant"
         },
