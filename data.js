@@ -28,14 +28,14 @@ const products = [
     {
         id: 3,
         title: {
-            fr: "Sac à Dos Urbain",
-            ar: "حقيبة ظهر حضرية"
+            fr: "Multifunctional Car Emergency Jump Starter High-Capacity PC+ABS Vehicle-Mounted Starter Battery Booster",
+            ar: "مصدر طاقة عالي الجودة لبدء التشغيل في حالات الطوارئ، جهاز بدء التشغيل في حالات الطوارئ 12 فولت، معدات شحن البطارية، طاقة خارجية (موديل 29B)"
         },
-        price: 3500,
-        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        price: 9500,
+        image: "images/HighpowerKL037.jpg",
         description: {
-            fr: "Sac à dos résistant à l'eau, idéal pour le travail ou les études avec compartiment pour PC portable 15 pouces.",
-            ar: "حقيبة ظهر مقاومة للماء، مثالية للعمل أو الدراسة مع مقصورة لكمبيوتر محمول مقاس 15 بوصة."
+            fr: "Multifunctional Car Emergency Jump Starter High-Capacity PC+ABS Vehicle-Mounted Starter Battery Booster",,
+            ar:  "مصدر طاقة عالي الجودة لبدء التشغيل في حالات الطوارئ، جهاز بدء التشغيل في حالات الطوارئ 12 فولت، معدات شحن البطارية، طاقة خارجية (موديل 29B)"
         }
     },
     {
