@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Algérie | Paiement à la livraison</title>
+    <meta name="description" content="Découvrez notre boutique avec paiement à la livraison dans les 58 wilayas d'Algérie.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons (lightweight alternative to Lucide for Vanilla JS) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="announcement-content">
+            <span class="t-announcementCOD">Paiement à la livraison</span>
+            <span class="separator">•</span>
+            <span class="t-announcementDelivery">Livraison dans les 58 wilayas d'Algérie</span>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="#" class="logo" onclick="navigateTo('home'); return false;">STORE.</a>
+            
+            <nav class="main-nav">
+                <a href="#" onclick="navigateTo('home'); return false;" class="t-home">Accueil</a>
+                <a href="#" onclick="navigateTo('shop'); return false;" class="t-shop">Boutique</a>
+                <a href="#" class="t-about">À propos</a>
+                <a href="#" class="t-delivery">Livraison</a>
+                <a href="#" class="t-contact">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Switcher -->
+                <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">عربي</button>
+                
+                <!-- Search Icon -->
+                <button class="icon-btn"><i class="ph ph-magnifying-glass"></i></button>
+
+                <!-- Cart Icon -->
+                <button class="icon-btn cart-btn" onclick="toggleCart()">
+                    <i class="ph ph-shopping-cart"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                
+                <!-- Mobile Menu Icon -->
+                <button class="icon-btn mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#" onclick="navigateTo('home'); toggleMobileMenu(); return false;" class="t-home">Accueil</a>
+            <a href="#" onclick="navigateTo('shop'); toggleMobileMenu(); return false;" class="t-shop">Boutique</a>
+            <a href="#" class="t-about">À propos</a>
+            <a href="#" class="t-delivery">Livraison</a>
+            <a href="#" class="t-contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area (Dynamic) -->
+    <main id="app-root"></main>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2 class="t-orderSummary">Votre commande</h2>
+            <button class="close-btn" onclick="toggleCart()"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <!-- Items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-totals">
+                <div class="total-row">
+                    <span class="t-subtotal">Sous-total</span>
+                    <span id="cartSubtotalVal">0 DA</span>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-full t-checkout" onclick="checkoutFromCart()">Finaliser la commande</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="logo">STORE.</div>
+                <p class="t-announcementCOD" style="margin-top: 1rem; color: #666;">Paiement à la livraison</p>
+                <div class="social-links">
+                    <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph ph-tiktok-logo"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="t-shop">Boutique</h4>
+                <a href="#" onclick="navigateTo('shop'); return false;" class="t-bestSellers">Meilleures Ventes</a>
+                <a href="#" class="t-home">Accueil</a>
+            </div>
+            <div class="footer-col">
+                <h4 class="t-about">À propos</h4>
+                <a href="#" class="t-contact">Contact</a>
+                <a href="#" class="t-delivery">Livraison</a>
+            </div>
+            <div class="footer-col">
+                <h4 class="t-footer.newsletter">Abonnez-vous à notre newsletter</h4>
+                <form class="newsletter-form" onsubmit="event.preventDefault()">
+                    <input type="email" placeholder="Email" required>
+                    <button type="submit" class="btn btn-primary t-footer.subscribe">S'abonner</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 STORE. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="#" class="t-footer.terms">Conditions Générales</a>
+                <a href="#" class="t-footer.privacy">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="#" class="whatsapp-float">
+        <i class="ph ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commande</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#28a745;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+
+button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+#message{
+    margin-top:15px;
+    text-align:center;
+    font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Passer une commande</h2>
+
+<form id="orderForm">
+
+<input type="text" id="firstName" placeholder="Prénom" required>
+
+<input type="text" id="lastName" placeholder="Nom" required>
+
+<input type="tel" id="phone" placeholder="Téléphone" required>
+
+<select id="wilaya" required>
+<option value="">Choisir la Wilaya</option>
+<option>Adrar</option>
+<option>Chlef</option>
+<option>Laghouat</option>
+<option>Oum El Bouaghi</option>
+<option>Batna</option>
+<option>Bejaia</option>
+<option>Alger</option>
+<option>Oran</option>
+<option>Constantine</option>
+<option>Sétif</option>
+<option>Tlemcen</option>
+</select>
+
+<input type="text" id="address" placeholder="Adresse complète" required>
+
+<input type="text" id="productName" value="Nom du produit" readonly>
+
+<input type="number" id="quantity" value="1" min="1">
+
+<input type="number" id="total" value="2500">
+
+<button type="submit">Commander</button>
+
+</form>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+// تأكد من وضع رابط Apps Script الخاص بك هنا
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAOtfaUGQH9Gw8XEX35IiMvvLi0YDzYJUFJM2oQqsHA6Za6CqmwvHlzw4ebixJ5NW6ew/exec";
+
+document.getElementById("orderForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerText;
+    
+    // تعطيل الزر لمنع الإرسال المزدوج
+    submitBtn.innerText = "Envoi en cours...";
+    submitBtn.disabled = true;
+    document.getElementById("message").innerHTML = "";
+
+    const data = {
+        id: Date.now().toString(),
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        phone: document.getElementById("phone").value,
+        wilaya: document.getElementById("wilaya").value,
+        address: document.getElementById("address").value,
+        productName: document.getElementById("productName").value,
+        quantity: document.getElementById("quantity").value,
+        total: document.getElementById("total").value,
+        status: "Nouvelle"
+    };
+
+    try {
+        // نستخدم text/plain لتفادي مشكلة CORS مع Google Apps Script
+        const response = await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            document.getElementById("message").style.color = "green";
+            document.getElementById("message").innerHTML = "✅ Commande envoyée avec succès.";
+            document.getElementById("orderForm").reset();
+        } else {
+            document.getElementById("message").style.color = "red";
+            document.getElementById("message").innerHTML = "Erreur : " + result.error;
+        }
+
+    } catch(error) {
+        document.getElementById("message").style.color = "red";
+        document.getElementById("message").innerHTML = "Erreur de connexion. Veuillez réessayer.";
+        console.error("Fetch error: ", error);
+    } finally {
+        // إعادة الزر إلى حالته الطبيعية
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+    }
+});
+</script>
+
+</body>
+</html>
