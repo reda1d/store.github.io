@@ -2,14 +2,14 @@ const products = [
     {
         id: 1,
         title: {
-            fr: "Montre Minimaliste Élégante",
-            ar: "ساعة أنيقة بسيطة"
+            fr: "Humidificateur USB 180ML  Voiture & Maison",
+            ar: "ساعة أنيقة بسيمرطب هواء USB 180 مل للسيارة والمنزلطة"
         },
-        price: 4500,
-        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        price: 1800,
+        image: "images/Humidificateur1.png",
         description: {
-            fr: "Une montre élégante avec un design épuré, parfaite pour toutes les occasions. Bracelet en cuir véritable.",
-            ar: "ساعة أنيقة بتصميم بسيط، مثالية لجميع المناسبات. حزام من الجلد الأصلي."
+            fr: "Mini Humidificateur d'Air USB 180ML  Diffuseur d'Arômes pour Voiture & Maison.",
+            ar: "حوّل أجواء سيارتك أو منزلك إلى مساحة منعشة ومريحة مع مرطب الهواء USB سعة 180 مل. يوفر رذاذًا ناعمًا يساعد على ترطيب الهواء، مع إضاءة LED متعددة الألوان تضفي لمسة عصرية وأجواء هادئة. يتميز بتصميم صغير وأنيق، ويعمل بهدوء تام عبر منفذ USB، مما يجعله مثاليًا للاستخدام في السيارة، غرفة النوم، المكتب أو المنزل."
         }
     },
     {
