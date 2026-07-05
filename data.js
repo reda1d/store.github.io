@@ -151,7 +151,6 @@ const translations = {
             firstName: "Prénom",
             lastName: "Nom",
             phone: "Téléphone",
-            address: "Adresse",
             commune: "Commune",
             wilaya: "Wilaya",
             selectWilaya: "Sélectionnez votre wilaya...",

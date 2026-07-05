@@ -375,7 +375,7 @@ async function submitCheckout(e) {
             lastName: "",
             phone: document.getElementById('phone').value,
             wilaya: wilayaName,
-            address: document.getElementById('address').value + " - " + document.getElementById('commune').value,
+            address: document.getElementById('commune').value,
             productName: cart.map(item => `${item.product.title.fr} (x${item.quantity})`).join(' + '),
             quantity: cart.reduce((sum, item) => sum + item.quantity, 0),
             total: total,
@@ -492,16 +492,6 @@ function createCheckoutView() {
                 </select>
             </div>
 
-            <div class="modern-field">
-                <label>العنوان *</label>
-                <input
-                    type="text"
-                    id="address"
-                    class="form-control"
-                    placeholder="Adresse de livraison"
-                    required
-                >
-            </div>
 
             <div class="modern-summary">
 
