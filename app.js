@@ -341,7 +341,7 @@ async function submitCheckout(e) {
     let isValid = true;
     
     // Simple validation logic
-    ['fname', 'lname', 'phone', 'address', 'commune', 'wilaya'].forEach(id => {
+   ['fullname', 'phone', 'address', 'commune', 'wilaya'].forEach(id => {
         const el = document.getElementById(id);
         const group = el.parentElement;
         if (!el.value.trim()) {
@@ -367,8 +367,8 @@ async function submitCheckout(e) {
 
         const data = {
             id: Date.now().toString(),
-            firstName: document.getElementById('fname').value,
-            lastName: document.getElementById('lname').value,
+            firstName: document.getElementById('fullname').value,
+            lastName: "",
             phone: document.getElementById('phone').value,
             wilaya: wilayaName,
             address: document.getElementById('address').value + " - " + document.getElementById('commune').value,
@@ -417,105 +417,123 @@ function createCheckoutView() {
     const t = translations[currentLang].checkout;
     const div = document.createElement('div');
     div.className = 'container section';
-    
+
     if (cart.length === 0) {
         div.innerHTML = `
-            <div class="text-center" style="padding: 4rem 0;">
+            <div class="text-center">
                 <h2>${t.emptyCart}</h2>
-                <button class="btn btn-primary mt-2" onclick="navigateTo('shop')">${t.continueShopping}</button>
             </div>
         `;
         return div;
     }
-    
-    const wilayaOptions = wilayas.map(w => `<option value="${w.id}">${w.id} - ${w.name}</option>`).join('');
-    
+
+    const wilayaOptions = wilayas.map(w =>
+        `<option value="${w.id}">${w.id} - ${w.name}</option>`
+    ).join('');
+
     div.innerHTML = `
-        <h1 class="mb-2">${t.title}</h1>
-        <div class="checkout-grid">
-            <div class="checkout-form-container">
-                <h3 class="mb-2">${t.sectionDelivery}</h3>
-                <form id="checkoutForm" onsubmit="submitCheckout(event)" novalidate>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">${t.firstName} *</label>
-                            <input type="text" class="form-control" id="fname" required>
-                            <span class="error-msg">${t.requiredField}</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">${t.lastName} *</label>
-                            <input type="text" class="form-control" id="lname" required>
-                            <span class="error-msg">${t.requiredField}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">${t.phone} *</label>
-                        <input type="tel" class="form-control" id="phone" required>
-                        <span class="error-msg">${t.requiredField}</span>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">${t.address} *</label>
-                        <input type="text" class="form-control" id="address" required>
-                        <span class="error-msg">${t.requiredField}</span>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">${t.commune} *</label>
-                            <input type="text" class="form-control" id="commune" required>
-                            <span class="error-msg">${t.requiredField}</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">${t.wilaya} *</label>
-                            <select class="form-control" id="wilaya" required onchange="handleWilayaChange(event)">
-                                <option value="">${t.selectWilaya}</option>
-                                ${wilayaOptions}
-                            </select>
-                            <span class="error-msg">${t.requiredField}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="payment-method mb-2">
-                        <i class="ph ph-check-circle" style="font-size:1.5rem;"></i>
-                        <span>${t.codSecure}</span>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-full" style="padding: 1rem; font-size: 1.1rem;">${t.submitOrder}</button>
-                </form>
+    <div class="modern-order-box">
+
+        <h2 class="order-title">
+            ${t.sectionDelivery}
+        </h2>
+
+        <form id="checkoutForm" onsubmit="submitCheckout(event)">
+
+            <div class="modern-field">
+                <label>الاسم الكامل *</label>
+                <input
+                    type="text"
+                    id="fullname"
+                    class="form-control"
+                    placeholder="Nom complet"
+                    required
+                >
             </div>
-            
-            <div class="checkout-summary">
-                <h3 class="mb-2">${t.orderSummary}</h3>
-                <div style="margin-bottom: 2rem;">
-                    ${cart.map(item => `
-                        <div class="summary-item">
-                            <span>${item.product.title[currentLang]} x ${item.quantity}</span>
-                            <span>${formatPrice(item.product.price * item.quantity)}</span>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div class="summary-item">
-                    <span style="color:#666;">${t.subtotal}</span>
-                    <span id="c-subtotal">${formatPrice(getCartSubtotal())}</span>
-                </div>
-                <div class="summary-item">
-                    <span style="color:#666;">${t.shipping}</span>
-                    <span id="c-shipping">${selectedWilayaZone ? formatPrice(shippingCosts[selectedWilayaZone]) : '-'}</span>
-                </div>
-                <div class="summary-total">
-                    <span>${t.total}</span>
-                    <span id="c-total">${formatPrice(getCartSubtotal() + (selectedWilayaZone ? shippingCosts[selectedWilayaZone] : 0))}</span>
-                </div>
+
+            <div class="modern-field">
+                <label>الهاتف *</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    class="form-control"
+                    placeholder="Numéro de téléphone"
+                    required
+                >
             </div>
-        </div>
+
+            <div class="modern-field">
+                <label>الولاية *</label>
+                <select
+                    id="wilaya"
+                    class="form-control"
+                    onchange="handleWilayaChange(event)"
+                    required
+                >
+                    <option value="">Wilaya</option>
+                    ${wilayaOptions}
+                </select>
+            </div>
+
+            <div class="modern-field">
+                <label>البلدية *</label>
+                <input
+                    type="text"
+                    id="commune"
+                    class="form-control"
+                    placeholder="Baladiya"
+                    required
+                >
+            </div>
+
+            <div class="modern-field">
+                <label>العنوان *</label>
+                <input
+                    type="text"
+                    id="address"
+                    class="form-control"
+                    placeholder="Adresse de livraison"
+                    required
+                >
+            </div>
+
+            <div class="modern-summary">
+
+                <div class="summary-line">
+                    <span>سعر المنتج</span>
+                    <span id="c-subtotal">
+                        ${formatPrice(getCartSubtotal())}
+                    </span>
+                </div>
+
+                <div class="summary-line">
+                    <span>سعر التوصيل</span>
+                    <span id="c-shipping">--</span>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total-line">
+                    <span>المجموع</span>
+                    <span id="c-total">
+                        ${formatPrice(getCartSubtotal())}
+                    </span>
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="modern-order-btn"
+            >
+                إشتري الآن
+            </button>
+
+        </form>
+
+    </div>
     `;
-    
-    // Ensure total is calculated properly on render if wilaya is already selected
-    setTimeout(() => {
-        const wSelect = document.getElementById('wilaya');
-        if(wSelect) handleWilayaChange({ target: wSelect });
-    }, 0);
-    
+
     return div;
 }
 
