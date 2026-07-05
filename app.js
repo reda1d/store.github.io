@@ -315,12 +315,16 @@ function createProductView(id) {
 
 function handleWilayaChange(e) {
     const wilayaId = parseInt(e.target.value);
+
+    updateCommunes(wilayaId);
+
     if (!wilayaId) {
         selectedWilayaZone = 0;
     } else {
         const wilaya = wilayas.find(w => w.id === wilayaId);
         selectedWilayaZone = wilaya ? wilaya.zone : 0;
     }
+
     updateCheckoutTotals();
 }
 
@@ -477,13 +481,15 @@ function createCheckoutView() {
 
             <div class="modern-field">
                 <label>البلدية *</label>
-                <input
-                    type="text"
-                    id="commune"
-                    class="form-control"
-                    placeholder="Baladiya"
-                    required
+               <select
+                   id="commune"
+                   class="form-control"
+                   required
                 >
+                   <option value="">
+                    اختر البلدية
+                    </option>
+                </select>
             </div>
 
             <div class="modern-field">
@@ -558,3 +564,39 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPage();
     updateCartUI();
 });
+let communesData = [];
+
+async function loadCommunes() {
+    try {
+        const response = await fetch('communes.json');
+        communesData = await response.json();
+    } catch (error) {
+        console.error('Erreur chargement communes:', error);
+    }
+}
+
+loadCommunes();
+function updateCommunes(wilayaId) {
+
+    const communeSelect = document.getElementById('commune');
+
+    communeSelect.innerHTML =
+        '<option value="">اختر البلدية</option>';
+
+    const filteredCommunes =
+        communesData.filter(
+            c => parseInt(c.wilaya_id) === parseInt(wilayaId)
+        );
+    console.log("Wilaya:", wilayaId);
+    console.log("Communes trouvées:", filteredCommunes.length);
+    filteredCommunes.forEach(commune => {
+
+        const option =
+            document.createElement('option');
+
+        option.value = commune.ar_name;
+        option.textContent = commune.ar_name;
+
+        communeSelect.appendChild(option);
+    });
+}
