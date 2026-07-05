@@ -345,16 +345,17 @@ async function submitCheckout(e) {
     let isValid = true;
     
     // Simple validation logic
-   ['fullname', 'phone', 'address', 'commune', 'wilaya'].forEach(id => {
-        const el = document.getElementById(id);
-        const group = el.parentElement;
-        if (!el.value.trim()) {
-            group.classList.add('has-error');
-            isValid = false;
-        } else {
-            group.classList.remove('has-error');
-        }
-    });
+   ['fullname', 'phone', 'commune', 'wilaya'].forEach(id => {
+    const el = document.getElementById(id);
+    const group = el.parentElement;
+
+    if (!el.value.trim()) {
+        group.classList.add('has-error');
+        isValid = false;
+    } else {
+        group.classList.remove('has-error');
+    }
+});
     
     if (isValid && cart.length > 0) {
         const submitBtn = form.querySelector('button[type="submit"]');
