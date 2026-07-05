@@ -568,7 +568,9 @@ let communesData = [];
 
 async function loadCommunes() {
     try {
-        const response = await fetch('communes.json');
+       const response = await fetch(
+  'https://raw.githubusercontent.com/reda1d/store.github.io/main/communes.json'
+);
         communesData = await response.json();
     } catch (error) {
         console.error('Erreur chargement communes:', error);
