@@ -373,10 +373,9 @@ async function submitCheckout(e) {
         const data = {
             id: Date.now().toString(),
             firstName: document.getElementById('fullname').value,
-            lastName: "",
             phone: document.getElementById('phone').value,
             wilaya: wilayaName,
-            address: document.getElementById('commune').value,
+            commune: document.getElementById('commune').value,
             productName: cart.map(item => `${item.product.title.fr} (x${item.quantity})`).join(' + '),
             quantity: cart.reduce((sum, item) => sum + item.quantity, 0),
             total: total,
