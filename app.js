@@ -386,7 +386,7 @@ async function submitCheckout(e) {
             const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "text/plain;charset=utf-8",
                 },
                 body: JSON.stringify(data)
             });
