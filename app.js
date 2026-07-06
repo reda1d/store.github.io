@@ -383,10 +383,11 @@ async function submitCheckout(e) {
         };
 
         try {
+            // تم تعديل الترويسة (Headers) هنا لترسل كـ application/json الحقيقية
             const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)
             });
