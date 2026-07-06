@@ -382,48 +382,14 @@ async function submitCheckout(e) {
             status: "Nouvelle"
         };
 
-        try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(data)
-    });
-
-    // ✅ نقرأ النص أولاً
-    const responseText = await response.text();
-    console.log("📄 رد السيرفر:", responseText);
-
-    // ✅ نحول لـ JSON
-    let result;
-    try {
-        result = JSON.parse(responseText);
-    } catch (e) {
-        throw new Error("السيرفر رد بـ HTML مش JSON: " + responseText.substring(0, 100));
-    }
-
-    console.log("✅ النتيجة:", result);
-
-    // ✅ نتحقق من النجاح
-    if (result.success) {
-        // ✅ الطلب نجح
-        cart = [];
-        updateCartUI();
-        navigateTo('success');
-        alert("✅ تم إرسال الطلب بنجاح!");
-    } else {
-        throw new Error(result.error || "خطأ من السيرفر");
-    }
-
-} catch (error) {
-    console.error('❌ خطأ:', error);
-    alert('❌ خطأ في الإرسال: ' + error.message + '\n\nيرجى التحقق من اتصالك.');
-    
-    // ✅ إعادة زر الإرسال للوضع الطبيعي
-    submitBtn.innerText = originalBtnText;
-    submitBtn.disabled = false;
-}
+       try {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                },
+                body: JSON.stringify(data)
+            });
         
 function createCheckoutView() {
     const t = translations[currentLang].checkout;
