@@ -425,9 +425,6 @@ async function submitCheckout(e) {
     submitBtn.disabled = false;
 }
         
-    }
-
-
 function createCheckoutView() {
     const t = translations[currentLang].checkout;
     const div = document.createElement('div');
