@@ -383,39 +383,50 @@ async function submitCheckout(e) {
         };
 
         try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
-                },
-                body: JSON.stringify(data)
-            });
-            
-            // On vérifie le texte d'abord au cas où le serveur renvoie du HTML (erreur)
-            const responseText = await response.text();
-            let result;
-            try {
-                result = JSON.parse(responseText);
-            } catch (e) {
-                throw new Error("Réponse non-JSON du serveur : " + responseText.substring(0, 50));
-            }
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(data)
+    });
 
-            if (result.success) {
-                // Process order success
-                cart = [];
-                updateCartUI();
-                navigateTo('success');
-            } else {
-                throw new Error(result.error || "Erreur serveur");
-            }
-        } catch (error) {
-            console.error('Error submitting order:', error);
-            alert('Erreur: ' + error.message + '\n\nخطأ في الإرسال. يرجى التحقق من اتصالك.');
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-        }
+    // ✅ نقرأ النص أولاً
+    const responseText = await response.text();
+    console.log("📄 رد السيرفر:", responseText);
+
+    // ✅ نحول لـ JSON
+    let result;
+    try {
+        result = JSON.parse(responseText);
+    } catch (e) {
+        throw new Error("السيرفر رد بـ HTML مش JSON: " + responseText.substring(0, 100));
     }
+
+    console.log("✅ النتيجة:", result);
+
+    // ✅ نتحقق من النجاح
+    if (result.success) {
+        // ✅ الطلب نجح
+        cart = [];
+        updateCartUI();
+        navigateTo('success');
+        alert("✅ تم إرسال الطلب بنجاح!");
+    } else {
+        throw new Error(result.error || "خطأ من السيرفر");
+    }
+
+} catch (error) {
+    console.error('❌ خطأ:', error);
+    alert('❌ خطأ في الإرسال: ' + error.message + '\n\nيرجى التحقق من اتصالك.');
+    
+    // ✅ إعادة زر الإرسال للوضع الطبيعي
+    submitBtn.innerText = originalBtnText;
+    submitBtn.disabled = false;
 }
+        
+    }
+
 
 function createCheckoutView() {
     const t = translations[currentLang].checkout;
