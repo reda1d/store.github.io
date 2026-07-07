@@ -134,9 +134,50 @@ function toggleMobileMenu() {
     document.getElementById('mobileNav').classList.toggle('active');
 }
 
+// تحديث دالة التنقل لكي تقوم بتغيير الرابط في شريط عنوان المتصفح (URL)
 function navigateTo(page, id = null) {
-    currentPage = page;
-    currentProductId = id;
+    if (page === 'product' && id) {
+        window.location.hash = `/product/${id}`;
+    } else if (page === 'home') {
+        window.location.hash = '/';
+    } else {
+        window.location.hash = `/${page}`;
+    }
+}
+
+// دالة الـ Router لقراءة الرابط الحالي وعرض الصفحة المناسبة ديناميكياً
+function handleRouting() {
+    const hash = window.location.hash || '#/';
+    
+    if (hash === '#/' || hash === '#/home') {
+        currentPage = 'home';
+        currentProductId = null;
+    } else if (hash === '#/shop') {
+        currentPage = 'shop';
+        currentProductId = null;
+    } else if (hash === '#/checkout') {
+        currentPage = 'checkout';
+        currentProductId = null;
+    } else if (hash === '#/success') {
+        currentPage = 'success';
+        currentProductId = null;
+    } else if (hash.startsWith('#/product/')) {
+        const parts = hash.split('/');
+        const id = parseInt(parts[parts.length - 1]);
+        
+        const productExists = products.some(p => p.id === id);
+        if (productExists) {
+            currentPage = 'product';
+            currentProductId = id;
+        } else {
+            currentPage = 'home';
+            currentProductId = null;
+        }
+    } else {
+        currentPage = 'home';
+        currentProductId = null;
+    }
+
     renderPage();
     window.scrollTo(0, 0);
 }
@@ -383,7 +424,6 @@ async function submitCheckout(e) {
         };
 
         try {
-            // إرسال البيانات مباشرة مع تجاوز قيود المتصفح المحلي بأمان
             await fetch("https://script.google.com/macros/s/AKfycbwQaeUU6mAhwUEmF2NA1gm0961KMtDrstKpzwYOWCxBWkXvWg-Td1_2nmQ0kKXaNlIPGw/exec", {
                 method: "POST",
                 mode: "no-cors", 
@@ -393,10 +433,8 @@ async function submitCheckout(e) {
                 body: JSON.stringify(data)
             });
 
-            // بمجرد عبور سطر الـ fetch بدون إلقاء خطأ شبكة، نعتبر العملية ناجحة تماماً
             console.log("✅ تم إرسال الطلب بنجاح إلى شيت وجوجل!");
             
-            // تفريغ السلة وتحديث الواجهة والانتقال لصفحة النجاح
             cart = [];
             updateCartUI();
             navigateTo('success');
@@ -545,43 +583,42 @@ function createSuccessView() {
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
     updateTranslations();
-    renderPage();
+    
+    // مراقبة شريط العناوين عند تغيير الرابط يدوياً أو بواسطة نظام التوجيه
+    window.addEventListener('hashchange', handleRouting);
+    
+    // تشغيل الـ Router لأول مرة لتفقد الرابط الحالي عند تحميل الصفحة
+    handleRouting();
+    
     updateCartUI();
 });
+
 let communesData = [];
 
 async function loadCommunes() {
     try {
-       const response = await fetch(
-  'https://raw.githubusercontent.com/reda1d/store.github.io/main/communes.json');
-        communesData = await response.json();
+       const response = await fetch('https://raw.githubusercontent.com/reda1d/store.github.io/main/communes.json');
+       communesData = await response.json();
     } catch (error) {
         console.error('Erreur chargement communes:', error);
     }
 }
 
 loadCommunes();
+
 function updateCommunes(wilayaId) {
-
     const communeSelect = document.getElementById('commune');
+    communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
 
-    communeSelect.innerHTML =
-        '<option value="">اختر البلدية</option>';
-
-    const filteredCommunes =
-        communesData.filter(
-            c => parseInt(c.wilaya_id) === parseInt(wilayaId)
-        );
+    const filteredCommunes = communesData.filter(
+        c => parseInt(c.wilaya_id) === parseInt(wilayaId)
+    );
     console.log("Wilaya:", wilayaId);
     console.log("Communes trouvées:", filteredCommunes.length);
     filteredCommunes.forEach(commune => {
-
-        const option =
-            document.createElement('option');
-
+        const option = document.createElement('option');
         option.value = commune.ar_name;
         option.textContent = commune.ar_name;
-
         communeSelect.appendChild(option);
     });
 }
