@@ -45,10 +45,23 @@ const products = [
             ar: "نظارات شمسية كلاسيكية"
         },
         price: 2500,
-        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "images/sac11.jpg",
         description: {
             fr: "Protection UV400, monture légère et résistante. Un style intemporel.",
             ar: "حماية UV400، إطار خفيف ومقاوم. أسلوب خالد."
+        }
+    },
+    {
+        id: 5,
+        title: {
+            fr: "Sac à Main en Cuir",
+            ar: "حقيبة يدية من الجلد"
+        },
+        price: 2000,
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3777?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        description: {
+            fr: "Sac à main en cuir véritable, idéal pour les occasions spéciales.",
+            ar: "حقيبة يدية من الجلد الحقيقي، مثالية للمناسبات الخاصة."
         }
     }
 ];
