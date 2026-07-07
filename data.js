@@ -41,29 +41,17 @@ const products = [
     {
         id: 4,
         title: {
-            fr: "Lunettes de Soleil Vintage",
-            ar: "نظارات شمسية كلاسيكية"
+            fr: "ROSACE - Sac à main.",
+            ar: "روزاس - حقيبة يد"
         },
         price: 2500,
         image: "images/sac11.jpg",
         description: {
-            fr: "Protection UV400, monture légère et résistante. Un style intemporel.",
-            ar: "حماية UV400، إطار خفيف ومقاوم. أسلوب خالد."
-        }
-    },
-    {
-        id: 5,
-        title: {
-            fr: "Sac à Main en Cuir",
-            ar: "حقيبة يدية من الجلد"
-        },
-        price: 2000,
-        image: "https://images.unsplash.com/photo-1549298916-b41d501d3777?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        description: {
-            fr: "Sac à main en cuir véritable, idéal pour les occasions spéciales.",
-            ar: "حقيبة يدية من الجلد الحقيقي، مثالية للمناسبات الخاصة."
+            fr: "Un sac à main élégant au design intemporel, pensé pour sublimer toutes vos tenues. Spacieux et pratique, il offre un large espace pour accueillir tous vos essentiels du quotidien avec style.",
+            ar: "حقيبة يد أنيقة بتصميم كلاسيكي، صُممت لتُضفي لمسة جمالية على جميع إطلالاتك. واسعة وعملية، توفر مساحة كافية لحمل جميع أغراضك اليومية بأناقة"
         }
     }
+    
 ];
 
 const wilayas = [
