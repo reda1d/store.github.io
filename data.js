@@ -58,7 +58,7 @@ const products = [
             ar: "ملابس رياضية FK"
         },
         price: 5200,
-        image: "images/add1.jpg",
+        image: "images/add1.png",
         description: {
             fr: "Des vêtements de sport de haute qualité, conçus pour un confort optimal lors des entraînements.",
             ar: "ملابس رياضية عالية الجودة، مصممة لتقديم الراحة المثلى أثناء التدريبات."
