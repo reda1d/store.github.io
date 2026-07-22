@@ -57,7 +57,7 @@ const products = [
             fr: "Survêtements FK",
             ar: "ملابس رياضية FK"
         },
-        price: 3000,
+        price: 5200,
         image: "images/add1.jpg",
         description: {
             fr: "Des vêtements de sport de haute qualité, conçus pour un confort optimal lors des entraînements.",
