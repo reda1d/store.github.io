@@ -50,8 +50,20 @@ const products = [
             fr: "Un sac à main élégant au design intemporel, pensé pour sublimer toutes vos tenues. Spacieux et pratique, il offre un large espace pour accueillir tous vos essentiels du quotidien avec style.",
             ar: "حقيبة يد أنيقة بتصميم كلاسيكي، صُممت لتُضفي لمسة جمالية على جميع إطلالاتك. واسعة وعملية، توفر مساحة كافية لحمل جميع أغراضك اليومية بأناقة"
         }
+    },
+    {
+        id: 5,
+        title: {
+            fr: "Survêtements FK",
+            ar: "ملابس رياضية FK"
+        },
+        price: 3000,
+        image: "images/add1.jpg",
+        description: {
+            fr: "Des vêtements de sport de haute qualité, conçus pour un confort optimal lors des entraînements.",
+            ar: "ملابس رياضية عالية الجودة، مصممة لتقديم الراحة المثلى أثناء التدريبات."
+        }
     }
-    
 ];
 
 const wilayas = [
